@@ -1,0 +1,2 @@
+# AutoMergeMaster
+Auto merge action
