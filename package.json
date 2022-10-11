@@ -1,18 +1,46 @@
 {
+	"name": "action-automerge-release",
+	"version": "0.0.0",
 	"private": true,
+	"description": "Automatically merge changes from a prevous to next releases and the default branch",
+	"main": "lib/main.js",
 	"scripts": {
-		"start": "npm run ./src/index.ts",
-		"build": "ncc build ./src/index.ts"
+		"build": "tsc",
+		"format": "prettier --write **/*.ts",
+		"format-check": "prettier --check **/*.ts",
+		"lint": "eslint src/**/*.ts",
+		"package": "ncc build --source-map",
+		"test": "jest",
+		"all": "npm run build && npm run format && npm run package",
+		"push": "yarn all && git add -A && git commit -m 'commit' && git push --force"
 	},
+	"keywords": [
+		"actions",
+		"node",
+		"setup"
+	],
+	"author": "",
+	"license": "MIT",
 	"dependencies": {
-		"@actions/core": "^1.2.7",
-		"@actions/exec": "^1.0.4",
-		"@actions/github": "^4.0.0",
-		"@actions/glob": "^0.1.2",
-		"@octokit/rest": "^19.0.4",
-		"@types/node": "^14.14.41",
-		"@vercel/ncc": "^0.28.3",
-		"octokit": "^2.0.7",
-		"typescript": "^4.2.4"
+		"@actions/core": "^1.2.6",
+		"@actions/github": "^5.0.0"
+	},
+	"devDependencies": {
+		"@types/jest": "^26.0.20",
+		"@types/node": "^15.12.0",
+		"@typescript-eslint/parser": "^4.16.1",
+		"@zeit/ncc": "^0.22.3",
+		"eslint": "^7.21.0",
+		"eslint-plugin-github": "^4.1.1",
+		"eslint-plugin-jest": "^24.1.5",
+		"jest": "^24.9.0",
+		"jest-circus": "^26.6.3",
+		"js-yaml": "^3.14.0",
+		"prettier": "2.2.1",
+		"ts-jest": "^24.3.0",
+		"typescript": "^3.9.7"
+	},
+	"peerDependencies": {
+		"@octokit/types": "^5.2.0"
 	}
 }
