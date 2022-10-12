@@ -1,8 +1,12 @@
 name: "build-test"
-on: # rebuild any PRs and main branch changes
-    push:
-        branches:
-            - master
+
+on:
+    workflow_dispatch:
+        inputs:
+            Name:
+                description: Who to greet
+                required: true
+                default: "GitHub Actions"
 
 jobs:
     build: # make sure build/ci work properly
