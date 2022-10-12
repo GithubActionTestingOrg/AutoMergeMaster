@@ -5,12 +5,8 @@
 	"description": "Automatically merge changes from a prevous to next releases and the default branch",
 	"main": "lib/main.js",
 	"scripts": {
-		"build": "tsc",
-		"format": "prettier --write **/*.ts",
-		"format-check": "prettier --check **/*.ts",
-		"lint": "eslint src/**/*.ts",
+		"build": "ncc build ./src/index.ts",
 		"package": "ncc build --source-map",
-		"test": "jest",
 		"all": "npm run build && npm run format && npm run package",
 		"push": "yarn all && git add -A && git commit -m 'commit' && git push --force"
 	},
