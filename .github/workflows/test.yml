@@ -1,20 +1,17 @@
-name: Hello
-
-on:
-    workflow_dispatch:
-        inputs:
-            Name:
-                description: Who to greet
-                required: true
-                default: "GitHub Actions"
+name: "build-test"
+on: # rebuild any PRs and main branch changes
+    push:
+        branches:
+            - master
 
 jobs:
-    Hello:
+    build: # make sure build/ci work properly
         runs-on: ubuntu-latest
-
         steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-
-            - name: Hello
-              run: "npm start"
+            - uses: actions/checkout@v2
+            - run: |
+                  npm install
+            - run: |
+                  npm run all
+            - run: |
+                  npm run test
