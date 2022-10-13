@@ -6,7 +6,7 @@ const repoOwner: string = github.context.repo.owner
 const repo: string = github.context.repo.repo
 const date = Date.now();
 
-function pullRequests(repoOwner:string, repo:string ) {
+function pullRequests(repoOwner: string, repo: string) {
     let pr = new github.GitHub(token)
     console.log(github)
     let resp = pr.pulls.list({
@@ -14,7 +14,13 @@ function pullRequests(repoOwner:string, repo:string ) {
         repo: repo,
     })
     console.log(pr);
-    const sortedPrByDate = [];
+    const sortedPrByDate = pr.sort((a: any, b: any) => {
+        return Date.parse(a) > Date.parse(b);
+    });
+
+    console.log('pr', pr);
+
+    console.log('sortedPrByDate', sortedPrByDate);
 
     return resp
 }
