@@ -5,7 +5,7 @@ inputs:
     token:
         description: "GitHub token"
         required: false
-        default: ${{ secrets.GITHUB_TOKEN }}
+        default: ${{ secrets.token }}
 
 runs:
     using: "node12"
