@@ -1,6 +1,6 @@
 name: Enforce timeout-minutes
 
-on: push
+on: [push, pull_request]
 
 jobs:
     enforce-timeout-minutes:
