@@ -1,21 +1,18 @@
-name: "build-test"
-
+name: remind review
 on:
-    workflow_dispatch:
-        inputs:
-            Name:
-                description: Who to greet
-                required: true
-                default: "GitHub Actions"
-
+    schedule:
+        - cron: "0 15 * * *"
 jobs:
-    build: # make sure build/ci work properly
+    send_pull_requests:
         runs-on: ubuntu-latest
+        name: A job to say hello
         steps:
-            - uses: actions/checkout@v2
-            - run: |
-                  npm install
-            - run: |
-                  npm run all
-            - run: |
-                  npm run test
+            - name: listPullRequests
+              uses: buildsville/list-pull-requests@v1
+              id: list
+              with:
+                  token: ${{secrets.GITHUB_TOKEN}}
+                  labels: '["WFR"]'
+                  skip_hour: "24"
+            - name: output
+              run: echo '${{ steps.list.outputs.pulls }}'
