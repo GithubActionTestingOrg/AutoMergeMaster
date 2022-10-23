@@ -1,18 +1,15 @@
-name: remind review
-on:
-    schedule:
-        - cron: "0 15 * * *"
+name: Enforce timeout-minutes
+
+on: push
+
 jobs:
-    send_pull_requests:
+    enforce-timeout-minutes:
         runs-on: ubuntu-latest
-        name: A job to say hello
+        timeout-minutes: 10
+
         steps:
-            - name: listPullRequests
-              uses: buildsville/list-pull-requests@v1
-              id: list
-              with:
-                  token: ${{secrets.token}}
-                  labels: '["WFR"]'
-                  skip_hour: "24"
-            - name: output
-              run: echo '${{ steps.list.outputs.pulls }}'
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Enforce timeout-minutes
+              uses: komiya-atsushi/action-enforce-timeout-minutes@v1.0.0
