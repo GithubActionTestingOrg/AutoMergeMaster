@@ -11,7 +11,7 @@ jobs:
               uses: buildsville/list-pull-requests@v1
               id: list
               with:
-                  token: ${{secrets.GITHUB_TOKEN}}
+                  token: ${{secrets.token}}
                   labels: '["WFR"]'
                   skip_hour: "24"
             - name: output
