@@ -1564,6 +1564,7 @@ const now = Date.now();
 const prom = pullRequests(repoOwner, repo);
 prom.then((pulls) => {
     let claim = pulls.data.filter((p) => filterLabel(p.labels, labels) && filterTime(p, now));
+    console.log('claim', claim);
     setOutput(claim);
 });
 
