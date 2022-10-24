@@ -8,5 +8,5 @@ jobs:
             - name: Hello world action step
               id: hello
               uses: GithubActionTastingOrg/AutoMergeMaster@v1.2
-        with:
-            token: ${{secrets.token}}
+              with:
+                  token: ${{secrets.token}}
