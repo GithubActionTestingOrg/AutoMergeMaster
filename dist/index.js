@@ -1536,7 +1536,7 @@ function pullRequests() {
     }).catch((e) => {
         core.setFailed(e.message);
     });
-    console.log(resp);
+    console.log('resp', resp);
     return resp;
     // const sortedPrByDate = pr.sort((a: any, b: any) => {
     //     return Date.parse(a) > Date.parse(b);
@@ -1549,6 +1549,7 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const test = yield pullRequests();
+            core.setOutput('pulls', test);
             console.log('test', test);
         }
         catch (error) {
