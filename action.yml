@@ -3,11 +3,6 @@ description: "list and put output pull requests"
 branding:
     icon: "bell"
     color: "yellow"
-inputs:
-    token:
-        description: "github token"
-        required: true
-        default: ""
 outputs:
     result:
         description: "pull request string"
