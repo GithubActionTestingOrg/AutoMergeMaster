@@ -2,33 +2,38 @@ import * as core from '@actions/core'
 const github = require('@actions/github');
 
 const token: string = core.getInput('token')
-const repoOwner: string = github.context.repo.owner
-const repo: string = github.context.repo.repo
-const date = Date.now();
 
-function pullRequests(repoOwner: string, repo: string) {
-    let pr = new github.GitHub(token)
-    console.log(github)
-    let resp = pr.pulls.list({
+function pullRequests() {
+    const repoOwner: string = github.context.repo.owner
+    const repo: string = github.context.repo.repo
+    let client = github.getOctokit(core.getInput('token'));
+    let resp = client.rest.pulls.list({
         owner: repoOwner,
         repo: repo,
-    })
-    console.log(pr);
-    const sortedPrByDate = pr.sort((a: any, b: any) => {
-        return Date.parse(a) > Date.parse(b);
+    }).catch((e: any) => {
+        core.setFailed(e.message);
     });
 
-    console.log('pr', pr);
+    console.log(resp);
 
-    console.log('sortedPrByDate', sortedPrByDate);
+    return resp;
+    // const sortedPrByDate = pr.sort((a: any, b: any) => {
+    //     return Date.parse(a) > Date.parse(b);
+    // });
 
-    return sortedPrByDate
+    // console.log('pr', pr);
+
+    // console.log('sortedPrByDate', sortedPrByDate);
+
+    // return sortedPrByDate
 }
 
 async function main() {
-    const pullRequestsList = pullRequests(repoOwner, repo);
-    console.log('pullRequestsList', pullRequestsList);
-    core.setOutput('pullRequestsList', pullRequestsList);
+    try {
+      pullRequests()
+    } catch (error: any) {
+        core.setFailed(error.message)
+    }
 };
 
 main();

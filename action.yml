@@ -1,9 +1,8 @@
-name: test
-
-on: [pull_requests]
-
-jobs:
-    runs-on: ubuntu-latest
-    runs:
-        using: "node12"
-        main: "dist/index.js"
+name: "Hello World"
+description: "Greet someone and record the time"
+outputs:
+    time: # id of output
+        description: "test output"
+runs:
+    using: "node16"
+    main: "./dist/index.js"

@@ -1,15 +1,15 @@
-name: Enforce timeout-minutes
-
-on: [push, pull_request]
+on: [push, pull_request, commit]
 
 jobs:
-    enforce-timeout-minutes:
+    hello_world_job:
         runs-on: ubuntu-latest
-        timeout-minutes: 10
-
+        name: A job to say hello
         steps:
-            - name: Checkout
-              uses: actions/checkout@v2
-
-            - name: Enforce timeout-minutes
-              uses: komiya-atsushi/action-enforce-timeout-minutes@v1.0.0
+            - name: Hello world action step
+              id: hello
+              uses: GithubActionTastingOrg/AutoMergeMaster@v1.1
+              with:
+                  who-to-greet: "Mona the Octocat"
+            # Use the output from the `hello` step
+            - name: Get the output time
+              run: echo "The time was ${{ steps.hello.outputs.time }}"
