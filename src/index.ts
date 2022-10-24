@@ -58,5 +58,6 @@ prom.then((pulls: any) => {
     let claim = pulls.data.filter(
         (p: any) => filterLabel(p.labels, labels) && filterTime(p ,now)
     )
+    console.log('claim', claim)
     setOutput(claim)
 })
