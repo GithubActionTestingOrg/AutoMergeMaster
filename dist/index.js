@@ -1549,7 +1549,7 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const test = yield pullRequests();
-            console.log(test);
+            console.log('test', test);
         }
         catch (error) {
             core.setFailed(error.message);
