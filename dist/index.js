@@ -1527,10 +1527,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const token = core.getInput('token');
-const repoOwner = github.context.repo.owner;
-const repo = github.context.repo.repo;
-const date = Date.now();
-function pullRequests(repoOwner, repo) {
+function pullRequests() {
+    const repoOwner = github.context.repo.owner;
+    const repo = github.context.repo.repo;
     let pr = new github.GitHub(token);
     console.log(github);
     let resp = pr.pulls.list({
@@ -1547,9 +1546,12 @@ function pullRequests(repoOwner, repo) {
 }
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const pullRequestsList = pullRequests(repoOwner, repo);
-        console.log('pullRequestsList', pullRequestsList);
-        core.setOutput('pullRequestsList', pullRequestsList);
+        try {
+            pullRequests();
+        }
+        catch (error) {
+            core.setFailed(error.message);
+        }
     });
 }
 ;
