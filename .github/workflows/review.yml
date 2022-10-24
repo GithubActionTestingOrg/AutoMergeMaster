@@ -13,3 +13,4 @@ jobs:
 
             - name: Enforce timeout-minutes
               uses: komiya-atsushi/action-enforce-timeout-minutes@v1.0.0
+              timeout-minutes: 30
