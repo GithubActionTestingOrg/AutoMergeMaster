@@ -1,4 +1,4 @@
-on: [push]
+on: [push, pull_request, commit]
 
 jobs:
     hello_world_job:
