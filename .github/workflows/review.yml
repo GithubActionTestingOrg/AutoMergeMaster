@@ -1,16 +1,17 @@
-on: [push, pull_request]
-
+name: remind review
+on:
+    schedule:
+        - cron: "0 15 * * *"
 jobs:
-    hello_world_job:
+    send_pull_requests:
         runs-on: ubuntu-latest
         name: A job to say hello
         steps:
-            - name: Hello world action step
-              uses: GithubActionTastingOrg/AutoMergeMaster@v1.2
+            - name: listPullRequests
+              uses: buildsville/list-pull-requests@v1
               id: list
               with:
                   token: ${{secrets.GITHUB_TOKEN}}
                   labels: '["WFR"]'
-                  skip_hour: "24"
             - name: output
               run: echo '${{ steps.list.outputs.pulls }}'
