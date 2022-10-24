@@ -5,8 +5,9 @@ inputs:
     token:
         description: "GitHub token"
         required: false
-        default: ${{ secrets.token }}
+        default: ${{ github.token }}
 
 runs:
+    ACTIONS_RUNNER_DEBUG: true
     using: "node12"
     main: "dist/index.js"
