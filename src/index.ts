@@ -22,7 +22,13 @@ function pullRequests(repoOwner: string, repo: string) {
 
     console.log('sortedPrByDate', sortedPrByDate);
 
-    return resp
+    return sortedPrByDate
 }
 
-pullRequests(repoOwner, repo);
+async function main() {
+    const pullRequestsList = pullRequests(repoOwner, repo);
+    console.log('pullRequestsList', pullRequestsList);
+    core.setOutput('pullRequestsList', pullRequestsList);
+};
+
+main();

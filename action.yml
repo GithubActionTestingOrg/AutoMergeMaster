@@ -1,13 +1,9 @@
 name: test
-description: Greet someone
 
-inputs:
-    token:
-        description: "GitHub token"
-        required: false
-        default: ${{ github.token }}
+on: [pull_requests]
 
-runs:
-    ACTIONS_RUNNER_DEBUG: true
-    using: "node12"
-    main: "dist/index.js"
+jobs:
+    runs-on: ubuntu-latest
+    runs:
+        using: "node12"
+        main: "dist/index.js"

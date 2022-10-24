@@ -6,7 +6,6 @@ jobs:
     enforce-timeout-minutes:
         runs-on: ubuntu-latest
         timeout-minutes: 10
-        ACTIONS_RUNNER_DEBUG: true
 
         steps:
             - name: Checkout
