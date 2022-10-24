@@ -1,7 +1,6 @@
-import * as core from '@actions/core'
+const core = require("@actions/core");
 const github = require('@actions/github');
-
-const token: string = core.getInput('token')
+const token = core.getInput('token');
 
 function pullRequests() {
     const repoOwner: string = github.context.repo.owner
@@ -30,7 +29,8 @@ function pullRequests() {
 
 async function main() {
     try {
-      pullRequests()
+        const test = pullRequests()
+        console.log(test);
     } catch (error: any) {
         core.setFailed(error.message)
     }

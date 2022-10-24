@@ -1510,7 +1510,7 @@ exports.paginatingEndpoints = paginatingEndpoints;
 /***/ }),
 
 /***/ 325:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
+/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
 "use strict";
 
@@ -1523,7 +1523,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const core = __webpack_require__(470);
 const github = __webpack_require__(469);
 const token = core.getInput('token');
@@ -1549,7 +1548,8 @@ function pullRequests() {
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            pullRequests();
+            const test = pullRequests();
+            console.log(test);
         }
         catch (error) {
             core.setFailed(error.message);
