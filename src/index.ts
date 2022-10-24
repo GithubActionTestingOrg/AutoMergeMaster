@@ -29,7 +29,7 @@ function pullRequests() {
 
 async function main() {
     try {
-        const test = pullRequests()
+        const test = await pullRequests()
         console.log(test);
     } catch (error: any) {
         core.setFailed(error.message)

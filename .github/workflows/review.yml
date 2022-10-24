@@ -9,4 +9,4 @@ jobs:
               id: hello
               uses: GithubActionTastingOrg/AutoMergeMaster@v1.2
               with:
-                  token: ${{secrets.token}}
+                  token: ${{secrets.GITHUB_TOKEN}}
