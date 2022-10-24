@@ -8,9 +8,9 @@ jobs:
             - name: Hello world action step
               uses: GithubActionTastingOrg/AutoMergeMaster@v1.2
               id: list
-                with:
-                token: ${{secrets.GITHUB_TOKEN}}
-                labels: '["WFR"]'
-                skip_hour: '24'
+              with:
+                  token: ${{secrets.GITHUB_TOKEN}}
+                  labels: '["WFR"]'
+                  skip_hour: "24"
             - name: output
               run: echo '${{ steps.list.outputs.pulls }}'
