@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"description": "Automatically merge changes from a prevous to next releases and the default branch",
-	"main": "lib/main.js",
+	"main": "dist/index.js",
 	"scripts": {
 		"build": "ncc build ./src/index.ts",
 		"package": "ncc build --source-map",

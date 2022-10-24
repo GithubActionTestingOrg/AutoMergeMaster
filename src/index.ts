@@ -1,39 +1,62 @@
 import * as core from '@actions/core'
-const github = require('@actions/github');
+import * as github from '@actions/github'
 
 const token: string = core.getInput('token')
+const labels: string[] = JSON.parse(core.getInput('labels'))
+const skipSec: Number = parseInt(core.getInput('skip_hour')) * 60 * 60
+const repoOwner: string = github.context.repo.owner
+const repo: string = github.context.repo.repo
 
-function pullRequests() {
-    const repoOwner: string = github.context.repo.owner
-    const repo: string = github.context.repo.repo
-    let client = github.getOctokit(core.getInput('token'));
+function pullRequests(repoOwner:string, repo:string ) {
+    let client = github.getOctokit(core.getInput('token'))
     let resp = client.rest.pulls.list({
         owner: repoOwner,
         repo: repo,
-    }).catch((e: any) => {
-        core.setFailed(e.message);
-    });
-
-    console.log(resp);
-
-    return resp;
-    // const sortedPrByDate = pr.sort((a: any, b: any) => {
-    //     return Date.parse(a) > Date.parse(b);
-    // });
-
-    // console.log('pr', pr);
-
-    // console.log('sortedPrByDate', sortedPrByDate);
-
-    // return sortedPrByDate
+    }).catch(
+        e => {
+            core.setFailed(e.message)
+        }
+    )
+    return resp
 }
 
-async function main() {
-    try {
-      pullRequests()
-    } catch (error: any) {
-        core.setFailed(error.message)
+function filterLabel(labels: any ,target: string[]):boolean{
+    let labelname = labels.map((label: any) => {
+        return label.name
+    })
+    let filterdLabels = labelname.filter(
+        (label: any) => target.indexOf(label) != -1
+    )
+    if ( filterdLabels.length == target.length) {
+        return true
+    } else {
+        return false
     }
-};
+}
 
-main();
+function filterTime(pull: any ,target: number):boolean{
+    const createdAt = Date.parse(pull.created_at)
+    const gapSec = Math.round((target - createdAt) / 1000)
+    if ( gapSec > skipSec ) {
+        return true
+    }
+    return false
+}
+
+function setOutput(pull: any){
+    let output = ''
+    for (const p of pull) {
+        output = output + p.title + "\\n" + p.html_url + "\\n---\\n"
+    }
+    output = output.slice(0,-7) //最後の"\\n---\\n"を削除
+    core.setOutput('pulls', output)
+}
+
+const now = Date.now()
+const prom = pullRequests(repoOwner,repo)
+prom.then((pulls: any) => {
+    let claim = pulls.data.filter(
+        (p: any) => filterLabel(p.labels, labels) && filterTime(p ,now)
+    )
+    setOutput(claim)
+})

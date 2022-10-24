@@ -1,4 +1,4 @@
-on: [push, pull_request, commit]
+on: [push, pull_request]
 
 jobs:
     hello_world_job:
@@ -7,9 +7,8 @@ jobs:
         steps:
             - name: Hello world action step
               id: hello
-              uses: GithubActionTastingOrg/AutoMergeMaster@v1.1
+              uses: GithubActionTastingOrg/AutoMergeMaster@v1.2
               with:
-                  who-to-greet: "Mona the Octocat"
-            # Use the output from the `hello` step
+                  token: ${{secrets.GITHUB_TOKEN}}
             - name: Get the output time
-              run: echo "The time was ${{ steps.hello.outputs.time }}"
+              run: echo "Pulls is ${{ steps.hello.outputs.pulls }}"
