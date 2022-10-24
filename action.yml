@@ -8,10 +8,6 @@ inputs:
         description: "github token"
         required: true
         default: ""
-    labels:
-        description: "require labels to list (JSON array string)"
-        required: false
-        default: '[ "WFR" ]'
 outputs:
     result:
         description: "pull request string"

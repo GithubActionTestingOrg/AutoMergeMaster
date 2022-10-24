@@ -8,10 +8,9 @@ jobs:
         name: A job to say hello
         steps:
             - name: listPullRequests
-              uses: buildsville/list-pull-requests@v1
+              uses: GithubActionTastingOrg/AutoMergeMaster@v1.2
               id: list
               with:
                   token: ${{secrets.GITHUB_TOKEN}}
-                  labels: '["WFR"]'
             - name: output
               run: echo '${{ steps.list.outputs.pulls }}'
