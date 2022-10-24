@@ -29,9 +29,9 @@ function pullRequests() {
 
 async function main() {
     try {
-        const test = await pullRequests()
-        core.setOutput('pulls', test)
-        console.log('test', test);
+        const pulls = await pullRequests()
+        core.setOutput('pulls', pulls)
+        console.log('pulls', pulls);
     } catch (error: any) {
         core.setFailed(error.message)
     }

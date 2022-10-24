@@ -1548,9 +1548,9 @@ function pullRequests() {
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const test = yield pullRequests();
-            core.setOutput('pulls', test);
-            console.log('test', test);
+            const pulls = yield pullRequests();
+            core.setOutput('pulls', pulls);
+            console.log('pulls', pulls);
         }
         catch (error) {
             core.setFailed(error.message);
