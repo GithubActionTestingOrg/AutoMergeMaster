@@ -1,7 +1,6 @@
 name: remind review
-on:
-    schedule:
-        - cron: "0 15 * * *"
+on: [push, pull_request]
+
 jobs:
     send_pull_requests:
         runs-on: ubuntu-latest
