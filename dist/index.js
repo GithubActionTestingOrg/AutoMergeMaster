@@ -1530,19 +1530,21 @@ const token = core.getInput('token');
 function pullRequests() {
     const repoOwner = github.context.repo.owner;
     const repo = github.context.repo.repo;
-    let pr = new github.GitHub(token);
-    console.log(github);
-    let resp = pr.pulls.list({
+    let client = github.getOctokit(core.getInput('token'));
+    let resp = client.rest.pulls.list({
         owner: repoOwner,
         repo: repo,
+    }).catch((e) => {
+        core.setFailed(e.message);
     });
-    console.log(pr);
-    const sortedPrByDate = pr.sort((a, b) => {
-        return Date.parse(a) > Date.parse(b);
-    });
-    console.log('pr', pr);
-    console.log('sortedPrByDate', sortedPrByDate);
-    return sortedPrByDate;
+    console.log(resp);
+    return resp;
+    // const sortedPrByDate = pr.sort((a: any, b: any) => {
+    //     return Date.parse(a) > Date.parse(b);
+    // });
+    // console.log('pr', pr);
+    // console.log('sortedPrByDate', sortedPrByDate);
+    // return sortedPrByDate
 }
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
