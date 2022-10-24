@@ -6,7 +6,11 @@ jobs:
         name: A job to say hello
         steps:
             - name: Hello world action step
-              id: hello
               uses: GithubActionTastingOrg/AutoMergeMaster@v1.2
-              with:
-                  token: ${{secrets.GITHUB_TOKEN}}
+              id: list
+                with:
+                token: ${{secrets.GITHUB_TOKEN}}
+                labels: '["WFR"]'
+                skip_hour: '24'
+            - name: output
+              run: echo '${{ steps.list.outputs.pulls }}'
